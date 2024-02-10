@@ -13,7 +13,7 @@ export const CanvasContainer = () => {
         <PaintedCube />
         <Room></Room>
         <PaintedCubeCopy />
-        <Environment preset='night' background={false} />
+        <Environment preset='night' background={false} ground={false} />
       </Suspense>
       <ambientLight intensity={Math.PI / 2} />
       <spotLight

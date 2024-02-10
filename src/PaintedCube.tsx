@@ -24,7 +24,7 @@ export function PaintedCube(props) {
   });
 
   return (
-    <group {...props} dispose={null}>
+    <group {...props} dispose={null} position={[0.56,3.62,-0.9]} scale={-0.34} castShadow={true}>
       <mesh
         ref={meshRef}
         castShadow
