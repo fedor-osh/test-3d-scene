@@ -1,13 +1,12 @@
 import { useThree } from "@react-three/fiber";
 import { useRef } from "react";
-import { MathUtils } from "three";
 
 export function Camera() {
-  const cameraRef = useRef();
+  const cameraRef = useRef<THREE.PerspectiveCamera>(null!);
 
   useThree(({ camera }) => {
-    camera.rotation.set(MathUtils.degToRad(-15), 0, 0);
-    camera.position.set(0.16, 4.3, 3.36);
+    camera.rotation.set(0, 0, 0);
+    camera.position.set(0, 0, 6);
   });
 
   return (

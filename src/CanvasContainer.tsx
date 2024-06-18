@@ -3,17 +3,21 @@ import { Canvas } from "@react-three/fiber";
 
 import { PaintedCube } from "./PaintedCube";
 import { Environment } from "@react-three/drei";
-import { Room } from "./scene";
 import { Camera } from "./components/Camera";
+import { ImagePlane } from "./components/ImagePlane";
 
 export const CanvasContainer = () => {
   return (
-    <Canvas style={{ width: "100%", height: "100%" }} translate={"no"}>
+    <Canvas
+      style={{ width: "100%", height: "100%" }}
+      translate={"no"}
+      dpr={Math.max(window.devicePixelRatio, 2)}
+    >
       <Camera></Camera>
       <group position={[0, 0, 0]}>
-        <Room></Room>
         <PaintedCube></PaintedCube>
       </group>
+      <ImagePlane />
       <Suspense fallback={null}>
         <Environment preset='night' background={false} ground={false} />
       </Suspense>

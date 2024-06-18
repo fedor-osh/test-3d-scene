@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+// import { useFrame } from "@react-three/fiber";
 import { type Material, type Mesh } from "three";
+import { GroupProps } from "@react-three/fiber";
 
 const path = "/paintedCube.glb";
 
@@ -10,8 +11,8 @@ type GLTF = ReturnType<typeof useGLTF> & {
   nodes: Record<string, Mesh>;
 };
 
-export function PaintedCubeCopy(props) {
-  const meshRef = useRef();
+export function PaintedCubeCopy(props: GroupProps) {
+  const meshRef = useRef<Mesh>(null);
   const { nodes, materials } = useGLTF(path) as GLTF;
 
   return (
