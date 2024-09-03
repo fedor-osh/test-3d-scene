@@ -1,10 +1,26 @@
-import { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Suspense, useRef } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 
-import { PaintedCube } from "./PaintedCube";
-import { Environment } from "@react-three/drei";
-import { Camera } from "./components/Camera";
+import { Environment, OrbitControls } from "@react-three/drei";
 import { ImagePlane } from "./components/ImagePlane";
+
+import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
+
+function CameraControls() {
+  const {
+    camera,
+    gl: { domElement },
+  } = useThree();
+
+  const controlsRef = useRef<OrbitControlsImpl>(null!);
+  useFrame(() => {
+    if (controlsRef.current) {
+      return controlsRef.current.update();
+    }
+  });
+
+  return <OrbitControls ref={controlsRef} args={[camera, domElement]} />;
+}
 
 export const CanvasContainer = () => {
   return (
@@ -13,10 +29,11 @@ export const CanvasContainer = () => {
       translate={"no"}
       dpr={Math.max(window.devicePixelRatio, 2)}
     >
-      <Camera></Camera>
-      <group position={[0, 0, 0]}>
+      <CameraControls />
+      {/* <Camera></Camera> */}
+      {/* <group position={[0, 0, 0]}>
         <PaintedCube></PaintedCube>
-      </group>
+      </group> */}
       <ImagePlane />
       <Suspense fallback={null}>
         <Environment preset='night' background={false} ground={false} />
