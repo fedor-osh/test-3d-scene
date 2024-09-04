@@ -26,8 +26,8 @@ function Points({}: PointsProps) {
     [t, f, a]
   );
 
-  const countX = 1507;
-  const countY = 1007;
+  const countX = 1080;
+  const countY = 722;
   const sep = 0.008;
 
   const colors: number[] = useMemo(() => [], []);
@@ -36,9 +36,14 @@ function Points({}: PointsProps) {
 
     for (let xi = 0; xi < countX; xi++) {
       for (let yi = 0; yi < countY; yi++) {
-        const x = sep * (xi - countX / 2);
-        const y = sep * (yi - countY / 2);
-        const z = graph(x, y);
+        const random = {
+          x: Math.random(),
+          y: Math.random(),
+          z: Math.random(),
+        };
+        const x = sep * (xi - countX / 2) + sep * random.x;
+        const y = sep * (yi - countY / 2) + sep * random.y;
+        const z = graph(x, y) + sep * random.z;
         positions.push(x, y, z);
 
         const pixelColor = getPixelColor({
@@ -73,8 +78,10 @@ function Points({}: PointsProps) {
     let i = 0;
     for (let xi = 0; xi < countX; xi++) {
       for (let yi = 0; yi < countY; yi++) {
-        const x = sep * (xi - countX / 2);
-        const y = sep * (yi - countY / 2);
+       
+
+        const x = sep * (xi - countX / 2) ;
+        const y = sep * (yi - countY / 2) ;
 
         positions[i + 2] = graph(x, y);
         i += 3;
